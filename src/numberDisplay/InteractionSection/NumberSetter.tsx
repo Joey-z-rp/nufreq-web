@@ -1,6 +1,11 @@
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-import React, { ChangeEvent, FunctionComponent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FunctionComponent,
+  KeyboardEvent,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setNumber as setNumberAction } from '../numberDisplayActions';
@@ -29,6 +34,11 @@ const NumberSetter: FunctionComponent = () => {
       dispatch(setNumberAction(Number(numberInput)));
     }
   };
+  const onKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      setNumber();
+    }
+  };
 
   return (
     <NumberSetterRoot>
@@ -37,6 +47,7 @@ const NumberSetter: FunctionComponent = () => {
         <Input
           disabled={isSettingNumber}
           onChange={onNumberChange}
+          onKeyPress={onKeyPress}
           type="number"
           value={numberInput}
         />

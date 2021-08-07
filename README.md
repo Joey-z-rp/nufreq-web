@@ -38,6 +38,7 @@ The build is minified and the filenames include the hashes.
 
 ## Considerations / Improvements
 
+- The refresh interval is limited to be greater than 3 to avoid spamming the backend server and potential UI issues
 - In an application with limited scope like this one, a central state management mechanism may not be necessary. Other alternatives may work just fine, e.g react context api. However, redux is used here to demonstrate how the interaction flows/folder structure can be organised in a bigger project.
 - Better UI/UX design
 - More unit tests to prevent regression

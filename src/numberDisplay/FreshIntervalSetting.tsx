@@ -5,7 +5,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Input from '@material-ui/core/Input';
-import React, { ChangeEvent, FunctionComponent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FunctionComponent,
+  KeyboardEvent,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRefreshInterval as setRefreshIntervalAction } from './numberDisplayActions';
 import { State } from '../redux/storeTypes';
@@ -23,11 +28,16 @@ const RefreshIntervalSetting: FunctionComponent = () => {
 
   const refreshIntervalInputNum = Number(refreshIntervalInput);
   const isValidInput =
-    !isNaN(refreshIntervalInputNum) && refreshIntervalInputNum > 3;
+    Number.isInteger(refreshIntervalInputNum) && refreshIntervalInputNum > 3;
 
   const setRefreshInterval = () => {
     if (isValidInput) {
       dispatch(setRefreshIntervalAction(refreshIntervalInputNum));
+    }
+  };
+  const onKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      setRefreshInterval();
     }
   };
 
@@ -44,6 +54,7 @@ const RefreshIntervalSetting: FunctionComponent = () => {
           error={!!refreshIntervalInput && !isValidInput}
           fullWidth
           onChange={onRefreshIntervalChange}
+          onKeyPress={onKeyPress}
           type="number"
           value={refreshIntervalInput}
         />
