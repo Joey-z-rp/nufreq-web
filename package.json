@@ -23,7 +23,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "REACT_APP_BASE_URL=http://localhost:8000 react-scripts start",
+    "start": "REACT_APP_API_BASE_URL=http://localhost:8000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint . && prettier --check .",
@@ -56,8 +56,11 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.172",
     "@types/styled-components": "^5.1.11",
     "eslint-config-prettier": "^8.3.0",
+    "fetch-mock-jest": "^1.5.1",
+    "lodash": "^4.17.21",
     "prettier": "^2.3.2"
   }
 }

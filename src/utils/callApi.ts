@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || '';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
 type ApiResponse<T> = {
   data: T;
