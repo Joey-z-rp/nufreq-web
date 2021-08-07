@@ -2,8 +2,10 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import React, { Fragment, FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import FrequencyDisplay from './FrequencyDisplay';
 import RefreshIntervalSetting from './FreshIntervalSetting';
 import InteractionSection from './InteractionSection/components/InteractionSection';
+import Notification from './Notification';
 import { fetchFrequency } from './numberDisplayActions';
 
 const NumberDisplay: FunctionComponent = () => {
@@ -21,7 +23,10 @@ const NumberDisplay: FunctionComponent = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item md={6} xs={12}>
-            <div>Frequency here</div>
+            <FrequencyDisplay />
+            {isQuiting && (
+              <p>Thanks for using Nufreq. You can close the window now.</p>
+            )}
           </Grid>
           {!isQuiting && (
             <Grid item md={6} xs={12}>
@@ -31,6 +36,7 @@ const NumberDisplay: FunctionComponent = () => {
         </Grid>
       </Container>
       <RefreshIntervalSetting />
+      <Notification />
     </Fragment>
   );
 };

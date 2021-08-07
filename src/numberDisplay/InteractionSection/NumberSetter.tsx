@@ -24,7 +24,11 @@ const NumberSetter: FunctionComponent = () => {
   const onNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNumberInput(event.target.value);
   };
-  const setNumber = () => dispatch(setNumberAction(Number(numberInput)));
+  const setNumber = () => {
+    if (!!numberInput) {
+      dispatch(setNumberAction(Number(numberInput)));
+    }
+  };
 
   return (
     <NumberSetterRoot>

@@ -24,7 +24,7 @@ const RefreshIntervalSetting: FunctionComponent = () => {
   const refreshIntervalInputNum = Number(refreshIntervalInput);
   const isValidInput =
     !isNaN(refreshIntervalInputNum) && refreshIntervalInputNum > 3;
-    
+
   const setRefreshInterval = () => {
     if (isValidInput) {
       dispatch(setRefreshIntervalAction(refreshIntervalInputNum));

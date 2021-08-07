@@ -1,4 +1,5 @@
 import {
+  CLEAR_NOTIFICATION,
   FETCH_FREQUENCY,
   FETCH_FREQUENCY_FAILURE,
   FETCH_FREQUENCY_SUCCESS,
@@ -9,18 +10,27 @@ import {
 } from './numberDisplayActions';
 import { StandardAction } from '../redux/storeTypes';
 
+type NumberFrequency = {
+  frequency: number;
+  number: string;
+}[];
+
 export type NumberDisplayState = {
   isFetchingFrequency: boolean;
   isSettingNumber: boolean;
-  numberFrequency: {}[]; // todo
+  notificationMessage: string;
+  numberFrequency: NumberFrequency;
   refreshInterval: number | undefined;
+  sessionId: string;
 };
 
 const initialState: NumberDisplayState = {
   isFetchingFrequency: false,
   isSettingNumber: false,
+  notificationMessage: '',
   numberFrequency: [],
   refreshInterval: undefined,
+  sessionId: '',
 };
 
 const numberDisplayReducer = (state = initialState, action: StandardAction) => {
@@ -47,6 +57,7 @@ const numberDisplayReducer = (state = initialState, action: StandardAction) => {
     case FETCH_FREQUENCY_FAILURE:
       return {
         ...state,
+        notificationMessage: 'Fail to load number frequency',
         isFetchingFrequency: false,
       };
 
@@ -60,12 +71,21 @@ const numberDisplayReducer = (state = initialState, action: StandardAction) => {
       return {
         ...state,
         isSettingNumber: false,
+        notificationMessage: action.payload!.isFib ? 'FIB' : 'Success',
+        sessionId: action.payload!.sessionId,
       };
 
     case SET_NUMBER_FAILURE:
       return {
         ...state,
+        notificationMessage: 'Fail to set number',
         isSettingNumber: false,
+      };
+
+    case CLEAR_NOTIFICATION:
+      return {
+        ...state,
+        notificationMessage: '',
       };
 
     default:
